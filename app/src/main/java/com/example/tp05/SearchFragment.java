@@ -1,14 +1,33 @@
 package com.example.tp05;
 
+import android.app.ProgressDialog;
+import android.content.Context;
+import android.os.AsyncTask;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.os.ConditionVariable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ListView;
+
+import com.example.tp05.Utilities.LogHelper;
+import com.example.tp05.Utilities.OMDBHelper;
+import com.example.tp05.Utilities.StreamHelper;
+
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 public class SearchFragment extends Fragment {
+    Button btnBuscar;
+    EditText edtTexto;
+    ListView lvResultado;
+
+    View rootLayout;
 
     public SearchFragment() {
         // Required empty public constructor
@@ -18,6 +37,91 @@ public class SearchFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_search, container, false);
+        if (rootLayout == null){
+            rootLayout = inflater.inflate(R.layout.fragment_search, container, false);
+        }
+
+        ObtenerReferencias();
+
+        SetearListeners();
+
+        return rootLayout;
+    }
+
+    private void ObtenerReferencias() {
+        btnBuscar = (Button) rootLayout.findViewById(R.id.btnBuscar);
+        edtTexto = (EditText) rootLayout.findViewById(R.id.edtTexto);
+        lvResultado = (ListView) rootLayout.findViewById(R.id.lvResultado);
+    }
+
+    private void SetearListeners() {
+        btnBuscar.setOnClickListener(btnBuscar_Click);
+    }
+
+    View.OnClickListener btnBuscar_Click = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            if (DatosValidos()){
+
+            }
+
+        }
+    };
+
+    private boolean DatosValidos() {
+
+    }
+
+    private class tareaAsincronicaSearchMovie extends AsyncTask<Void, String,String> {
+        private ProgressDialog dialog;
+        private Context context;
+        private String strURL;
+
+        public tareaAsincronicaSearchMovie(Context context){
+            this.context = context;
+            dialog = new ProgressDialog(context);
+        }
+
+        private void setURL(String setURL) {this.strURL = setURL}
+
+        public void getSearchMovies (String strSearch){
+            String strURL;
+            strURL = OMDBHelper.getSearchURL(strSearch);
+            setURL(strURL);
+            execute();
+        }
+
+        @Override
+        protected String doInBackground(Void ...parametros){
+            HttpURLConnection miconexion = null;
+            URL urlApi;
+            String strResultado = "";
+
+            try {
+                urlApi = new URL(this.strURL);
+                miconexion = (HttpURLConnection) urlApi.openConnection();
+                miconexion.setRequestMethod("GET");
+                if (miconexion.getResponseCode() == 200) {
+
+                    strResultado = StreamHelper.GetFullStringFromInputReader(miconexion.getInputStream());
+                    Thread.sleep(500);
+                    publishProgress("conectando");
+                    Thread.sleep(500);
+                    publishProgress("leyendo");
+                    Thread.sleep(500);
+                    publishProgress("comparando");
+                    Thread.sleep(500);
+                    publishProgress("cerrando");
+                } else {
+
+                }
+            } catch (Exception e){
+                LogHelper.d ("al Conectar o procesar ocurrio un error" + e.getMessage());
+            } finally {
+                if (miconexion !=null){
+                    miconexion.disconnect();
+                }
+            }
+        }
     }
 }
