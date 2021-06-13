@@ -11,7 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 
-public class MovieFragment extends Fragment {
+public class MovieFragment extends BaseFragment {
     TextView tvPelicula, tvDatos, tvDescripcion;
     ImageView ivPoster;
 

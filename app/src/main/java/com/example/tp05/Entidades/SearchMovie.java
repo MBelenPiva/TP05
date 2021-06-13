@@ -1,8 +1,10 @@
 package com.example.tp05.Entidades;
 
 public class SearchMovie {
-    // public Movie[] Search;
-    public int totalResults;
-    public boolean response;
+    public String Title;
+    public int Year;
+    public String imdbID;
+    public String Type;
+    public String Poster;
 
 }
