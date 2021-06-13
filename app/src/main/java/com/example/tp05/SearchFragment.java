@@ -18,6 +18,7 @@ import android.widget.ListView;
 import com.example.tp05.Utilities.LogHelper;
 import com.example.tp05.Utilities.OMDBHelper;
 import com.example.tp05.Utilities.StreamHelper;
+import com.example.tp05.Utilities.ValidacionesHelpers;
 
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -61,15 +62,29 @@ public class SearchFragment extends Fragment {
     View.OnClickListener btnBuscar_Click = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
+            tareaAsincronicaSearchMovie miTarea;
+            String strSearchText;
+
             if (DatosValidos()){
-
+                strSearchText = edtTexto.getText().toString();
+                miTarea = new tareaAsincronicaSearchMovie(getActivity());
+                miTarea.getSearchMovies(strSearchText);
             }
-
         }
     };
 
     private boolean DatosValidos() {
+        boolean blnRetorno = true;
+        String strMensaje= "";
 
+        if (ValidacionesHelpers.esUnStringValido(edtTexto)){
+            strMensaje += "Ingrese titulo de pelicula:\n";
+            blnRetorno = false;
+        }
+        if (!blnRetorno){
+            LogHelper.d("");
+        }
+        return blnRetorno;
     }
 
     private class tareaAsincronicaSearchMovie extends AsyncTask<Void, String,String> {
@@ -96,6 +111,8 @@ public class SearchFragment extends Fragment {
             HttpURLConnection miconexion = null;
             URL urlApi;
             String strResultado = "";
+
+            LogHelper.d("doInBackground");
 
             try {
                 urlApi = new URL(this.strURL);
