@@ -7,7 +7,9 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
 
-public class MainActivity extends AppCompatActivity {
+import com.example.tp05.Bases.BaseActivity;
+
+public class MainActivity extends BaseActivity {
 
     SearchFragment searchFragment;
     MovieFragment movieFragment;
@@ -18,8 +20,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         CrearFragments();
-
-        ReemplazarFragment(searchFragment);
+        goToFragmentWithReplace(R.id.fraContenedor, searchFragment, false);
     }
 
     private void CrearFragments() {

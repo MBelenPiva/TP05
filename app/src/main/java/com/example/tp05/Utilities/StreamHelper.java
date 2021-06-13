@@ -8,7 +8,7 @@ public class StreamHelper {
     public static String GetFullStringFromInputReader (InputStream straemDeEntrada){
         BufferedReader responseReader;
         String responseLine;
-        String strResultado = null;
+        String strResultado = "";
         StringBuilder sbResponse;
 
         try{

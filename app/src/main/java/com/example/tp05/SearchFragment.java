@@ -107,6 +107,12 @@ public class SearchFragment extends Fragment {
         }
 
         @Override
+        protected void onPreExecute(){
+            this.dialog.setMessage("Buscando la informacion...");
+            this.dialog.show();
+        }
+
+        @Override
         protected String doInBackground(Void ...parametros){
             HttpURLConnection miconexion = null;
             URL urlApi;
