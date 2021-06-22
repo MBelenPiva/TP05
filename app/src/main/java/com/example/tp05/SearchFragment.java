@@ -145,6 +145,7 @@ public class SearchFragment extends Fragment {
                     miconexion.disconnect();
                 }
             }
+            return strResultado;
         }
     }
 }

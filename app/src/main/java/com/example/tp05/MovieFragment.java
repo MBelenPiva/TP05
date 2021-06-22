@@ -11,7 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 
-public class MovieFragment extends BaseFragment {
+public class MovieFragment extends MainActivity {
     TextView tvPelicula, tvDatos, tvDescripcion;
     ImageView ivPoster;
 
@@ -45,4 +45,6 @@ public class MovieFragment extends BaseFragment {
     }
 
     private void SetearListeners(){
+
+    }
     }
