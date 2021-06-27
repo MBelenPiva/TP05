@@ -9,15 +9,36 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.example.tp05.Entidades.SearchMovie;
+import com.example.tp05.Entidades.SearchResponse;
 
 
 public class MovieFragment extends MainActivity {
     TextView tvPelicula, tvDatos, tvDescripcion;
     ImageView ivPoster;
+    View rootLayout = null;
+    SearchResponse movie = null;
 
-    View rootLayout;
     public MovieFragment(){
+    }
 
+    public void setMovie(SearchMovie movie){
+        movie = movie;
+    }
+
+    public void mostrarMovie(){
+        if(movie != null){
+        String strTitle = movie.getTitle();
+        tvPelicula.setText(strTitle);
+        String strDatos = movie.getYear() + " " + movie.getType();
+        tvDatos.setText(strDatos);
+        String strURLivPoster = movie.getPoster();
+        }
+        else{
+            Toast.makeText(getActivity(), "No existe", Toast.LENGTH_LONG);
+        }
     }
 
     @Override
@@ -31,8 +52,6 @@ public class MovieFragment extends MainActivity {
         ObtenerReferencias();
 
         SetearListeners();
-
-
 
         this.setTitle("Movie");
 

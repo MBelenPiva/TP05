@@ -8,6 +8,9 @@ import androidx.fragment.app.FragmentTransaction;
 import android.os.Bundle;
 
 import com.example.tp05.Bases.BaseActivity;
+import com.example.tp05.Entidades.SearchMovie;
+
+import javax.xml.transform.Result;
 
 public class MainActivity extends BaseActivity {
 
@@ -45,8 +48,10 @@ public class MainActivity extends BaseActivity {
         ReemplazarFragment(movieFragment);
     }
 
-    public void irASearchFragment(){
-        ReemplazarFragment(searchFragment);
+    public void irASearchFragment(SearchMovie movie){
+        MovieFragment.setMovie(movie);
+        irASearchFragment(MovieFragment);
+
     }
 
 }
