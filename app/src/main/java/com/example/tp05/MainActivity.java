@@ -44,13 +44,13 @@ public class MainActivity extends BaseActivity {
 
     }
 
-    public void irMovieFragment(){
+    public void irAMovieFragment(){
         ReemplazarFragment(movieFragment);
     }
 
     public void irASearchFragment(SearchMovie movie){
         MovieFragment.setMovie(movie);
-        irASearchFragment(MovieFragment);
+        irASearchFragment(movieFragment);
 
     }
 

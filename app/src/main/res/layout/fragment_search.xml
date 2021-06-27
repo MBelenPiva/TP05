@@ -29,6 +29,9 @@
             android:id="@+id/btnBuscar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:insetLeft="9dp"
+            android:insetTop="9dp"
+            android:insetBottom="9dp"
             android:text="Button" />
 
         <ListView

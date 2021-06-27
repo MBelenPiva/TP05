@@ -66,6 +66,5 @@ public class MovieFragment extends MainActivity {
     }
 
     private void SetearListeners(){
-
     }
     }
