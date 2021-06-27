@@ -7,7 +7,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 public class BaseActivity extends AppCompatActivity{
 
-    public void goToFragmentWithAdd(intContainerId, Fragment fragment, Boolean addBackStack){
+    public void goToFragmentWithAdd(int intContainerId, Fragment fragment, Boolean addBackStack){
     FragmentManager fragmentManager;
     FragmentTransaction fragmentTransaction;
     String strTAG;
@@ -37,7 +37,7 @@ public class BaseActivity extends AppCompatActivity{
         if(addBackStack){
             strTAG = fragment.getClass().getName();
             fragmentTransaction.replace(intContainerId, fragment, strTAG);
-            fragmentTransaction.addToBackStack(str TAG);
+            fragmentTransaction.addToBackStack(strTAG);
         }else{
             fragmentTransaction.replace(intContainerId, fragment);
         }

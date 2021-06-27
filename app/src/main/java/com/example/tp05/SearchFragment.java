@@ -11,17 +11,24 @@ import android.os.ConditionVariable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
+import com.example.tp05.Entidades.SearchMovie;
 import com.example.tp05.Utilities.LogHelper;
 import com.example.tp05.Utilities.OMDBHelper;
 import com.example.tp05.Utilities.StreamHelper;
 import com.example.tp05.Utilities.ValidacionesHelpers;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
 
 public class SearchFragment extends Fragment {
     Button btnBuscar;
@@ -97,7 +104,7 @@ public class SearchFragment extends Fragment {
             dialog = new ProgressDialog(context);
         }
 
-        private void setURL(String setURL) {this.strURL = setURL}
+        private void setURL(String setURL) {this.strURL = setURL;}
 
         public void getSearchMovies (String strSearch){
             String strURL;
@@ -146,6 +153,35 @@ public class SearchFragment extends Fragment {
                 }
             }
             return strResultado;
+        }
+
+        @Override
+        protected void onPostExecute(String resultado){
+            super.onPostExecute(resultado);
+            ArrayList<SearchMovie> listMovie;
+            listMovie = JSON(resultado);
+            ArrayAdapter<SearchMovie> arrayAdapterMovie;
+            arrayAdapterMovie = new ArrayAdapter<SearchMovie>(getContext(), android.R.layout.simple_list_item_1, listMovie);
+            lvResultado.setAdapter(arrayAdapterMovie);
+
+            if (listMovie.size()==0){
+                Toast.makeText(getActivity(), "Error, No hay peliculas",Toast.LENGTH_LONG);
+            }
+            else{
+                Toast.makeText(getActivity(), "Se encontraron [" + listMovie.size() + "]", Toast.LENGTH_LONG);
+            }
+        }
+
+        private ArrayList <SearchMovie> JSON (String resultado) {
+            ArrayList<SearchMovie> listReturn;
+            SearchMovie movie;
+            JSONObject jsonResponse;
+            JSONArray searchoJsonArray;
+            int intTotalResults, intYear;
+            boolean blnResponse;
+            String strTitle, strYear, strImdbID, srtType, strPoster;
+            listReturn = new ArrayList<SearchMovie>();
+
         }
     }
 }
