@@ -32,6 +32,8 @@ public class MovieFragment extends MainActivity {
 
         SetearListeners();
 
+
+
         this.setTitle("Movie");
 
         return rootLayout;

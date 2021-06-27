@@ -33,10 +33,12 @@ public class MainActivity extends BaseActivity {
         FragmentTransaction transaction;
 
         manager = getSupportFragmentManager();
+
         transaction = manager.beginTransaction();
         transaction.replace(R.id.fraContenedor, fragmento,null);
         transaction.addToBackStack(null);
         transaction.commit();
+
     }
 
     public void irMovieFragment(){
