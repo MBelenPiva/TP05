@@ -181,7 +181,7 @@ public class SearchFragment extends Fragment {
             boolean blnResponse;
             String strTitle, strYear, strImdbID, srtType, strPoster;
             listReturn = new ArrayList<SearchMovie>();
-
+            return listReturn;
         }
     }
 }
